@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0px;
+      margin: 0px;
+      
+
+    }
+
+    .outer {
+      width: 50%;
+      min-width:100vh;
+      border: 2px solid black;
+      justify-self: center;
+      margin-top: 100px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, #157677, #addf99) ;
+
+    }
+
+    #head {
+      width: 100%;
+      min-height:100px;
+      padding-top: 20px;
+      padding-left: 50px;
+      box-sizing: border-box;
+    }
+
+    .row {
+      display: flex;
+      width: 100%;
+      height: 30vh;
+    }
+
+    #inpt {
+      border-radius: 100px;
+      margin-left: 10px;
+      padding-left: 20px;
+      width: 70%;
+      height: 30%;
+    }
+
+    #btn {
+      background-color: orangered;
+      border-radius: 100px;
+      width: 80px;
+      height: 50px;
+      box-sizing: border-box;
+      margin-right: 15px;
+    }
+
+    #btn:hover {
+      color: beige;
+      border-radius: 100px;
+
+    }
+
+    ul li{
+      list-style: none;
+      font-size: 20px;
+     padding: 5px 10px 15px 40px;
+      user-select: none;
+      cursor: pointer;
+      position:relative;
+    }
+    ul li span{
+      position: absolute;
+      right:0px;
+      top:15px;
+      width:30px;
+      height:30px;
+      font-size:30px;
+      color:red;
+      line-height: 15px;
+      padding:5px 5px 5px 5px;
+}
+ul li span:hover{
+               background-color: #addf99;
+}
+
+
+    ul li::before{
+                  content: '';
+                  position:absolute;
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                  background-image:url(unchecked.jpg);
+                  background-size: cover;
+                  top:15px;
+                  left:10px;
+   
+              
+             
+   
+    
+    }
+  
+     ul li.checked {
+    
+      text-decoration: line-through;
+       
+    } 
+    ul li.checked:before{
+                            background-image: url(checked.jpg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="outer">
+    <div id="head">
+      <h2>To-Do-List<img src="url.jpg" width="40" height="20px" /></h2>
+
+      <div class="row">
+        <input id="inpt" type="text" placeholder="Add Your Text" />
+        <button type="button" id="btn">Add</button>
+
+      </div>
+      <ul id="list"></ul>
+    </div>
+  </div>
+  <script>
+    document.getElementById("btn").addEventListener('click', function (e) {
+      // alert("hello")
+      let a = inpt.value;
+      console.log(a)
+      if (a === "") {
+        alert("please fill the value")
+      } else {
+        const li = document.createElement("li")
+        li.innerHTML = a
+        list.appendChild(li)
+        let c = document.createElement("span")
+        c.innerHTML = "\u00d7";
+        li.appendChild(c)
+     
+      document.getElementById('inpt').value='';
+        addsome();
+      }
+      
+
+    })
+
+    document.getElementById('list').addEventListener('click', function(e){
+      // alert('Hi this is UL')
+
+      let targetName = e.target.tagName;
+      if(targetName == 'LI'){
+        e.target.classList.toggle('checked')
+        addsome();
+      }else if(targetName == 'SPAN'){
+        e.target.parentNode.remove();
+        addsome();
+      
+      }
+      
+      })
+      function addsome(){
+        localStorage.setItem('key',list.innerHTML)
+      }
+      function addsomeone(){
+            list.innerHTML=localStorage.getItem('key')
+        
+      }
+      addsomeone();
+
+ 
+      
+
+
+    // document.querySelector('#list').addEventListener('click', function (e) {
+    //     let b = e.target.tagName;
+    //     console.log(b);
+    //     if (b === 'LI') {
+    //       let f = e.target.parentNode;
+    //       f.remove();
+    //     }
+    //   })
+
+
+  </script>
+</body>
+
+</html>
